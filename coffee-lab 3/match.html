@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Find my match — Coffee Lab</title>
+<meta name="description" content="Answer five quick questions about how you drink coffee and get matched to Indian specialty beans built for your taste.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,600&family=Archivo:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<link rel="icon" href='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40"><circle cx="20" cy="20" r="19" fill="%231F3D2B"/><ellipse cx="20" cy="20" rx="8.5" ry="12" fill="%23DFA126" transform="rotate(24 20 20)"/></svg>'>
+</head>
+<body>
+<header class="site-header" id="site-header"></header>
+
+<main>
+  <div class="quiz-shell" id="quiz-shell"></div>
+  <div class="wrap" id="results-shell" hidden>
+    <div class="match-hero">
+      <p class="eyebrow">Your match report</p>
+      <h1 id="match-title">Coffees built for your cup</h1>
+      <p class="lede" id="match-summary" style="margin:10px auto 0"></p>
+      <div style="margin-top:22px;display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
+        <button class="btn btn-ghost" onclick="restart()">Retake the quiz</button>
+        <a class="btn btn-primary" href="directory.html">Browse everything</a>
+      </div>
+    </div>
+    <div class="card-grid" id="match-grid" style="padding:40px 0 30px"></div>
+    <section style="padding:0 0 80px" id="runners-wrap" hidden>
+      <p class="eyebrow">Also worth a look</p>
+      <div class="card-grid" id="runners-grid" style="margin-top:20px"></div>
+    </section>
+  </div>
+</main>
+
+<footer class="site-footer" id="site-footer"></footer>
+
+<script src="js/data.js"></script>
+<script src="js/content.js"></script>
+<script src="js/app.js"></script>
+<script src="js/match.js"></script>
+</body>
+</html>

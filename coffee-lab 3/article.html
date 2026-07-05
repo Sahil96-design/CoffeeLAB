@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Article — Coffee Lab</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,600&family=Archivo:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<link rel="icon" href='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40"><circle cx="20" cy="20" r="19" fill="%231F3D2B"/><ellipse cx="20" cy="20" rx="8.5" ry="12" fill="%23DFA126" transform="rotate(24 20 20)"/></svg>'>
+</head>
+<body>
+<header class="site-header" id="site-header"></header>
+
+<main>
+  <article class="article-shell" id="article"></article>
+</main>
+
+<footer class="site-footer" id="site-footer"></footer>
+
+<script src="js/data.js"></script>
+<script src="js/content.js"></script>
+<script src="js/app.js"></script>
+<script>
+const id = new URLSearchParams(location.search).get("id");
+const a = ARTICLES.find(x => x.id === id);
+const el = document.getElementById("article");
+renderChrome(a && a.type === "story" ? "blogs" : "learn");
+
+if (!a){
+  el.innerHTML = `<div class="empty-state"><h3>We couldn't find that article</h3>
+    <p>It may have moved.</p><a class="btn btn-primary" href="learn.html">Back to Coffee 101</a></div>`;
+} else {
+  document.title = `${a.title} — Coffee Lab`;
+  const backHref = a.type === "story" ? "blogs.html" : "learn.html";
+  const backLabel = a.type === "story" ? "Stories" : "Coffee 101";
+  const siblings = ARTICLES.filter(x => x.type === a.type);
+  const i = siblings.findIndex(x => x.id === a.id);
+  const next = siblings[(i + 1) % siblings.length];
+
+  el.innerHTML = `
+    <nav class="crumbs" style="padding:0 0 22px" aria-label="Breadcrumb">
+      <a href="index.html">Home</a> / <a href="${backHref}">${backLabel}</a> / <span>${esc(a.title)}</span>
+    </nav>
+    <span class="article-meta">${esc(a.tag)}<i class="dot"></i>${a.minutes} min read</span>
+    <h1 style="margin-top:12px">${esc(a.title)}</h1>
+    <p class="standfirst">${esc(a.standfirst)}</p>
+    <div class="article-body">
+      ${a.body.map(([t, txt]) => t === "h2" ? `<h2>${esc(txt)}</h2>` : `<p>${esc(txt)}</p>`).join("")}
+    </div>
+    <div class="article-footer">
+      <a class="btn btn-ghost" href="${backHref}">← All ${backLabel.toLowerCase()}</a>
+      <a class="btn btn-primary" href="article.html?id=${next.id}">Next: ${esc(next.title)} →</a>
+    </div>`;
+}
+</script>
+</body>
+</html>

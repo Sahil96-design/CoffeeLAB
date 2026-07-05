@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Know your coffee — Coffee Lab</title>
+<meta name="description" content="Coffee 101: honest guides to roast levels, processing, varietals, brewing and India's coffee regions.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,600&family=Archivo:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<link rel="icon" href='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40"><circle cx="20" cy="20" r="19" fill="%231F3D2B"/><ellipse cx="20" cy="20" rx="8.5" ry="12" fill="%23DFA126" transform="rotate(24 20 20)"/></svg>'>
+</head>
+<body>
+<header class="site-header" id="site-header"></header>
+
+<main>
+  <section class="dir-hero">
+    <div class="wrap">
+      <p class="eyebrow">Coffee 101</p>
+      <h1>Know your coffee</h1>
+      <p class="lede" style="color:#C9D3C3">Short, plain-language guides to everything printed on a specialty coffee bag — so the directory reads like a menu, not a puzzle.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="article-grid" id="guides-grid"></div>
+
+      <div class="learn-band" style="margin-top:56px">
+        <div>
+          <h2>Learned enough? Put it to work.</h2>
+          <p>The match quiz turns everything on this page into five quick questions — and hands you three coffees to start with.</p>
+        </div>
+        <a class="btn btn-gold" href="match.html">Find my match</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer" id="site-footer"></footer>
+
+<script src="js/data.js"></script>
+<script src="js/content.js"></script>
+<script src="js/app.js"></script>
+<script>
+renderChrome("learn");
+document.getElementById("guides-grid").innerHTML = ARTICLES.filter(a => a.type === "guide").map(a => `
+  <a class="article-card" href="article.html?id=${a.id}">
+    <span class="article-meta">${esc(a.tag)}<i class="dot"></i>${a.minutes} min read</span>
+    <h3>${esc(a.title)}</h3>
+    <p>${esc(a.standfirst)}</p>
+    <span class="read-more">Read the guide →</span>
+  </a>`).join("");
+</script>
+</body>
+</html>

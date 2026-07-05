@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Coffee Lab — the Indian coffee directory</title>
+<meta name="description" content="One place to know everything about coffee in India. Browse specialty beans from Indian roasters, match a coffee to your taste, and learn how coffee works.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,600&family=Archivo:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<link rel="icon" href='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40"><circle cx="20" cy="20" r="19" fill="%231F3D2B"/><ellipse cx="20" cy="20" rx="8.5" ry="12" fill="%23DFA126" transform="rotate(24 20 20)"/></svg>'>
+</head>
+<body>
+<header class="site-header" id="site-header"></header>
+
+<main>
+  <!-- HERO -->
+  <section class="hero">
+    <svg class="hero-beans" viewBox="0 0 400 400" aria-hidden="true">
+      <g fill="#F2F1E9">
+        <ellipse cx="120" cy="90" rx="42" ry="60" transform="rotate(28 120 90)"/>
+        <ellipse cx="270" cy="180" rx="52" ry="74" transform="rotate(-14 270 180)"/>
+        <ellipse cx="140" cy="300" rx="36" ry="52" transform="rotate(50 140 300)"/>
+      </g>
+      <g stroke="#1F3D2B" stroke-width="7" fill="none">
+        <path d="M120 30 Q100 90 120 150" transform="rotate(28 120 90)"/>
+        <path d="M270 106 Q246 180 270 254" transform="rotate(-14 270 180)"/>
+        <path d="M140 248 Q124 300 140 352" transform="rotate(50 140 300)"/>
+      </g>
+    </svg>
+    <div class="wrap">
+      <p class="eyebrow">The Indian coffee directory</p>
+      <h1>One place to know <em>everything</em> about coffee in India</h1>
+      <p class="lede">Every specialty bean, decoded — estate, roast, process and flavour — so you can find the coffee you'll actually love.</p>
+      <form class="search-bar" role="search" action="directory.html" method="get">
+        <label class="visually-hidden" for="hero-q">Search coffee</label>
+        <input id="hero-q" type="search" name="q" placeholder="Search coffee, roaster or flavour — try &quot;jaggery&quot;" autocomplete="off">
+        <button class="btn btn-gold" type="submit">Search</button>
+      </form>
+      <div class="hero-stats" id="hero-stats"></div>
+    </div>
+    <svg class="hero-ridge" viewBox="0 0 1440 110" preserveAspectRatio="none" aria-hidden="true">
+      <path d="M0 110 L0 74 Q140 22 300 62 Q430 96 560 48 Q700 0 840 52 Q980 100 1120 56 Q1280 8 1440 66 L1440 110 Z" fill="#F2F1E9"/>
+      <path d="M0 84 Q140 34 300 72 Q430 104 560 58 Q700 12 840 62 Q980 108 1120 66 Q1280 20 1440 76" fill="none" stroke="#DFA126" stroke-width="2.5" opacity=".8"/>
+    </svg>
+  </section>
+
+  <!-- EXPLORE -->
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">Explore coffee</p>
+          <h2>Fresh from the Western Ghats</h2>
+          <p class="lede">A rotating shelf from the directory — nine roasters, five states, one obsession.</p>
+        </div>
+        <a class="btn btn-ghost" href="directory.html">View all coffees</a>
+      </div>
+      <div class="card-grid scroll-mobile" id="featured-grid"></div>
+    </div>
+  </section>
+
+  <!-- HOW DO YOU LIKE YOUR COFFEE -->
+  <section class="section section-alt">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">Start with your cup</p>
+          <h2>How do you like your coffee?</h2>
+          <p class="lede">Pick the way you drink it and we'll shortlist beans built for that cup — or take the two-minute match quiz.</p>
+        </div>
+        <a class="btn btn-primary" href="match.html">Find my match</a>
+      </div>
+      <div class="style-grid" id="style-grid"></div>
+    </div>
+  </section>
+
+  <!-- COFFEE 101 -->
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">Coffee 101</p>
+          <h2>Know your coffee</h2>
+          <p class="lede">Short, honest guides to the words on the bag — roast, process, varietal and the rest.</p>
+        </div>
+        <a class="btn btn-ghost" href="learn.html">All guides</a>
+      </div>
+      <div class="article-grid" id="learn-grid"></div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer" id="site-footer"></footer>
+
+<script src="js/data.js"></script>
+<script src="js/content.js"></script>
+<script src="js/app.js"></script>
+<script>
+renderChrome("home");
+
+// hero stats — derived live from the dataset
+const brands = new Set(COFFEES.map(c => c.brand)).size;
+const states = new Set(COFFEES.flatMap(c => c.states)).size;
+const estates = new Set(COFFEES.map(c => c.estate).filter(Boolean)).size;
+document.getElementById("hero-stats").innerHTML = [
+  [COFFEES.length, "coffees"], [brands, "roasters"], [estates, "estates"], [states, "states"]
+].map(([n, l]) => `<div><b>${n}</b><span>${l}</span></div>`).join("");
+
+// featured: a stable-but-varied pick — best-covered coffee per roaster, then top up
+const byBrand = {};
+COFFEES.forEach(c => { (byBrand[c.brand] ??= []).push(c); });
+const dayseed = Math.floor(Date.now() / 864e5);
+let featured = Object.values(byBrand).map(list => list[dayseed % list.length]);
+featured.sort((a, b) => hashCode(a.id + dayseed) - hashCode(b.id + dayseed));
+featured = featured.slice(0, 8);
+document.getElementById("featured-grid").innerHTML = featured.map(c => coffeeCard(c)).join("");
+
+// style cards
+const cnt = styleCounts();
+const cupSVG = {
+  milk: `<svg class="style-ico" viewBox="0 0 80 80" fill="none" aria-hidden="true"><path d="M18 28 h38 v6 a19 22 0 0 1 -38 0 Z" fill="#F4EFE2"/><path d="M56 32 h7 a7 8 0 0 1 0 16 h-8" stroke="#F4EFE2" stroke-width="4"/><path d="M24 33 q8 6 16 0 t14 0" stroke="#DFA126" stroke-width="3"/><path d="M30 14 q-4 6 0 10 M42 12 q-4 7 0 12" stroke="#F4EFE2" stroke-width="3" stroke-linecap="round"/></svg>`,
+  black: `<svg class="style-ico" viewBox="0 0 80 80" fill="none" aria-hidden="true"><path d="M20 30 h34 v5 a17 20 0 0 1 -34 0 Z" fill="#2B1D14" stroke="#F4EFE2" stroke-width="3"/><path d="M54 34 h6 a6 7 0 0 1 0 14 h-7" stroke="#F4EFE2" stroke-width="3.6"/><ellipse cx="37" cy="32" rx="14" ry="3.4" fill="#DFA126" opacity=".9"/><path d="M31 14 q-4 6 0 10 M43 12 q-4 7 0 12" stroke="#F4EFE2" stroke-width="3" stroke-linecap="round"/></svg>`,
+  cold: `<svg class="style-ico" viewBox="0 0 80 80" fill="none" aria-hidden="true"><path d="M26 16 h26 l-3 46 a4 4 0 0 1 -4 4 h-12 a4 4 0 0 1 -4 -4 Z" fill="none" stroke="#F4EFE2" stroke-width="3.4"/><path d="M27.4 34 h23.4" stroke="#F4EFE2" stroke-width="3"/><path d="M28 36 h22 l-2 26 a3 3 0 0 1 -3 3 h-12 a3 3 0 0 1 -3 -3 Z" fill="#4A3423" opacity=".85"/><rect x="31" y="40" width="8" height="9" rx="2.5" fill="#F4EFE2" opacity=".9" transform="rotate(14 35 44)"/><rect x="41" y="50" width="8" height="9" rx="2.5" fill="#F4EFE2" opacity=".85" transform="rotate(-12 45 54)"/><path d="M48 12 L34 30" stroke="#DFA126" stroke-width="3.4" stroke-linecap="round"/></svg>`,
+};
+document.getElementById("style-grid").innerHTML = `
+  <a class="style-card style-milk" href="directory.html?style=milk">
+    ${cupSVG.milk}
+    <span class="style-count">${cnt.milk} coffees</span>
+    <h3>With milk</h3>
+    <p>Medium-dark and dark roasts with the body to cut through a cappuccino or filter kaapi.</p>
+  </a>
+  <a class="style-card style-black" href="directory.html?style=black">
+    ${cupSVG.black}
+    <span class="style-count">${cnt.black} coffees</span>
+    <h3>Black</h3>
+    <p>Light and medium roasts where estate character — fruit, florals, caramel — shows undiluted.</p>
+  </a>
+  <a class="style-card style-cold" href="directory.html?style=cold">
+    ${cupSVG.cold}
+    <span class="style-count">${cnt.cold} coffees</span>
+    <h3>Cold brew &amp; iced</h3>
+    <p>Fruity naturals and sweet mediums that steep into the smoothest glass of the summer.</p>
+  </a>`;
+
+// coffee 101 cards (3 guides)
+const learn = ARTICLES.filter(a => a.type === "guide").slice(0, 3);
+document.getElementById("learn-grid").innerHTML = learn.map(a => `
+  <a class="article-card" href="article.html?id=${a.id}">
+    <span class="article-meta">${esc(a.tag)}<i class="dot"></i>${a.minutes} min read</span>
+    <h3>${esc(a.title)}</h3>
+    <p>${esc(a.standfirst)}</p>
+    <span class="read-more">Read the guide →</span>
+  </a>`).join("");
+</script>
+</body>
+</html>

@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Coffee Lab — every great Indian coffee, made easy to find</title>
+<meta name="description" content="Every great Indian coffee, made easy to find. Browse specialty beans, match a coffee to your taste, learn the craft.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,600&family=Archivo:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/home.css">
+<link rel="preload" as="image" href="assets/hero/f_00.jpg">
+<link rel="icon" href='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40"><circle cx="20" cy="20" r="19" fill="%231F3D2B"/><ellipse cx="20" cy="20" rx="8.5" ry="12" fill="%23DFA126" transform="rotate(24 20 20)"/></svg>'>
+</head>
+<body>
+<header class="site-header over-hero" id="site-header"></header>
+
+<main>
+  <!-- ══ 1 · CINEMATIC HERO — scroll-scrubbed frame sequence ══ -->
+  <section class="cine" id="cine" aria-label="Introduction">
+    <div class="cine-stage">
+      <canvas id="cine-canvas" aria-hidden="true"></canvas>
+      <div class="cine-grade"></div>
+
+      <div class="stage">
+        <span class="kicker">The Indian Coffee Directory</span>
+        <h1 class="h1">Every Great<br>Indian Coffee,</h1>
+      </div>
+
+      <div class="stage">
+        <p class="h1"><em>made easy<br>to find.</em></p>
+      </div>
+
+      <div class="stage">
+        <span class="kicker">Begin anywhere</span>
+        <p class="h1" style="font-size:clamp(1.9rem,3.8vw,3.2rem)">Ninety-nine beans.<br>One of them is yours.</p>
+        <div class="cta-row">
+          <a class="btn btn-gold" href="match.html">Find my coffee</a>
+          <a class="btn btn-ghost" id="surprise" href="#" style="border-color:#CDC4AC;color:#F2EFE4">Surprise me</a>
+        </div>
+        <span class="stats-line" id="hero-stats-line"></span>
+      </div>
+
+      <div class="scroll-cue" aria-hidden="true">Scroll<i></i></div>
+    </div>
+  </section>
+
+  <!-- ══ 2 · POPULAR PICKS ══ -->
+  <section class="sec" aria-label="Popular picks">
+    <div class="orb orb-gold" style="top:-80px; right:-140px;" data-speed="0.08"></div>
+    <div class="wrap">
+      <div class="sec-head-row reveal">
+        <div>
+          <span class="sec-kicker">Start here</span>
+          <h2>Popular picks to get you started</h2>
+          <p class="sub">Six easy first steps. One per roaster.</p>
+        </div>
+        <a class="btn btn-ghost" href="directory.html">All 99 →</a>
+      </div>
+      <div class="card-grid scroll-mobile" id="picks-grid"></div>
+    </div>
+  </section>
+
+  <!-- ══ 3 · HOW DO YOU LIKE YOUR COFFEE ══ -->
+  <section class="sec" style="padding-top:40px" aria-label="Browse by cup">
+    <div class="wrap">
+      <div class="sec-head-row reveal">
+        <div>
+          <span class="sec-kicker">Your cup</span>
+          <h2>How do you like your coffee?</h2>
+        </div>
+      </div>
+      <div class="cups" id="cups"></div>
+    </div>
+  </section>
+
+  <!-- ══ 4 · WHY INDIAN SPECIALTY COFFEE — bento ══ -->
+  <section class="sec" aria-label="Why Indian specialty coffee">
+    <div class="orb orb-green" style="bottom:-120px; left:-180px;" data-speed="0.1"></div>
+    <div class="wrap">
+      <div class="sec-head-row reveal">
+        <div>
+          <span class="sec-kicker">The case</span>
+          <h2>Why Indian specialty coffee deserves a place in your cup</h2>
+        </div>
+      </div>
+      <div class="bento">
+        <div class="tile dark t-2x2 reveal">
+          <span class="n">01</span>
+          <h3>A whole world of flavour</h3>
+          <p>Bright, fruity naturals to deep chocolatey classics — one origin, every direction.</p>
+        </div>
+        <figure class="tile img t-2x1 reveal" style="transition-delay:70ms">
+          <div class="ph" style="background-image:url('assets/hero/f_58.jpg')" data-speed="-0.06"></div>
+          <figcaption>Shade-grown · Western Ghats</figcaption>
+        </figure>
+        <div class="tile reveal" style="transition-delay:120ms">
+          <span class="n">02</span>
+          <h3>Every region, its own signature</h3>
+          <p>Coorg to Araku — each valley cups differently.</p>
+        </div>
+        <div class="tile gold reveal" style="transition-delay:170ms">
+          <span class="n">—</span>
+          <span class="big-stat">400<span style="font-size:.45em">yrs</span></span>
+          <p>of growing coffee, since seven smuggled seeds.</p>
+        </div>
+        <div class="tile green t-2x1 reveal" style="transition-delay:100ms">
+          <span class="n">03</span>
+          <h3>A heritage worth tasting</h3>
+          <p>From legendary Monsooned Malabar to the filter kaapi that raised a nation.</p>
+        </div>
+        <div class="tile t-2x1 reveal" style="transition-delay:150ms">
+          <span class="n">04</span>
+          <h3>A new wave worth following</h3>
+          <p>Anaerobic, barrel-aged, kombucha-fermented — the lab is open.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ 5 · ROASTERS ══ -->
+  <section class="sec" style="padding-top:30px" aria-label="Roasters">
+    <div class="wrap">
+      <div class="sec-head-row reveal">
+        <div>
+          <span class="sec-kicker">The makers</span>
+          <h2>Roasters you'll discover here</h2>
+        </div>
+        <a class="btn btn-ghost" href="directory.html">Browse the shelf →</a>
+      </div>
+      <div class="roasters" id="roasters"></div>
+    </div>
+  </section>
+
+  <!-- ══ 6 · NEWSLETTER ══ -->
+  <section class="sec" style="padding-top:20px" aria-label="Newsletter">
+    <div class="wrap">
+      <div class="news reveal">
+        <span class="sec-kicker" style="color:var(--marigold)">The letter</span>
+        <h2>Your weekly dose of Indian coffee</h2>
+        <p>Beans worth trying. Stories worth telling. Once a week.</p>
+        <form class="news-form" id="news-form" novalidate>
+          <label class="visually-hidden" for="news-email">Email address</label>
+          <input id="news-email" type="email" placeholder="you@example.com" autocomplete="email" required>
+          <button class="btn btn-gold" type="submit">Subscribe</button>
+        </form>
+        <p class="news-ok" id="news-ok" hidden>You're in. First letter lands Friday.</p>
+        <small>No spam. Just good coffee.</small>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer" id="site-footer"></footer>
+
+<script src="js/data.js"></script>
+<script src="js/app.js"></script>
+<script src="js/home.js"></script>
+<script>
+document.getElementById("hero-stats-line").textContent =
+  `${COFFEES.length} coffees · ${new Set(COFFEES.map(c=>c.brand)).size} roasters · ${new Set(COFFEES.flatMap(c=>c.states)).size} states`;
+</script>
+</body>
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Coffee directory — Coffee Lab</title>
+<meta name="description" content="Browse every specialty coffee in the Indian directory. Filter by roast, process, region, flavour, price and more.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,600&family=Archivo:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<link rel="icon" href='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40"><circle cx="20" cy="20" r="19" fill="%231F3D2B"/><ellipse cx="20" cy="20" rx="8.5" ry="12" fill="%23DFA126" transform="rotate(24 20 20)"/></svg>'>
+</head>
+<body>
+<header class="site-header" id="site-header"></header>
+
+<main>
+  <section class="dir-hero">
+    <div class="wrap">
+      <p class="eyebrow">Coffee directory</p>
+      <h1 id="dir-title">Every bean, one shelf</h1>
+      <form class="search-bar" role="search" onsubmit="event.preventDefault(); state.q = document.getElementById('dir-q').value; apply();">
+        <label class="visually-hidden" for="dir-q">Search coffee</label>
+        <input id="dir-q" type="search" placeholder="Search coffee, roaster, estate or flavour" autocomplete="off">
+        <button class="btn btn-gold" type="submit">Search</button>
+      </form>
+    </div>
+  </section>
+
+  <div class="wrap dir-layout">
+    <aside class="filters" id="filters" aria-label="Filters">
+      <h2>Filters <button type="button" onclick="clearFilters()">Clear all</button></h2>
+      <div id="filter-groups"></div>
+      <div style="margin-top:18px;display:flex;gap:10px;">
+        <button class="btn btn-primary filters-close" style="display:none;flex:1;justify-content:center" onclick="toggleFilters(false)">Show results</button>
+      </div>
+    </aside>
+
+    <section aria-live="polite">
+      <div class="dir-toolbar">
+        <span class="dir-count" id="dir-count"></span>
+        <button class="btn btn-ghost filters-open-btn" onclick="toggleFilters(true)">Filters</button>
+        <label class="visually-hidden" for="dir-sort">Sort coffees</label>
+        <select id="dir-sort" onchange="state.sort=this.value; apply();">
+          <option value="relevance">Sort: relevance</option>
+          <option value="price-asc">Price: low to high</option>
+          <option value="price-desc">Price: high to low</option>
+          <option value="roast-asc">Roast: light to dark</option>
+          <option value="roast-desc">Roast: dark to light</option>
+          <option value="name">Name: A–Z</option>
+        </select>
+      </div>
+      <div class="chip-row" id="chip-row"></div>
+      <div class="card-grid" id="dir-grid"></div>
+    </section>
+  </div>
+</main>
+
+<footer class="site-footer" id="site-footer"></footer>
+
+<script src="js/data.js"></script>
+<script src="js/content.js"></script>
+<script src="js/app.js"></script>
+<script src="js/directory.js"></script>
+</body>
+</html>
